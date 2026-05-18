@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="声音涂鸦 - 声波可视化画板，将声音转化为可交互的视觉涂鸦作品">
+  <title>声音涂鸦 | 声波可视化画板</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 页头：品牌与浏览器兼容性提示 -->
+  <header class="site-header">
+    <div class="site-header__brand">
+      <h1 class="site-header__title">声音涂鸦</h1>
+      <p class="site-header__tagline">声波可视化画板</p>
+    </div>
+    <p class="site-header__compat" id="browserCompat" role="alert">
+      本应用仅支持 <strong>Chrome</strong> 与 <strong>Edge</strong> 最新版本浏览器
+    </p>
+  </header>
+
+  <!-- 主画布区：全屏深色示波器风格 -->
+  <main class="stage" id="stage">
+    <div class="canvas-shell" id="canvasShell" aria-label="涂鸦画布区域">
+      <!-- 主绘图层（后续里程碑可拆分为波形层 / 轨迹层 / 粒子层） -->
+      <canvas id="mainCanvas" class="canvas-shell__canvas" aria-label="声音涂鸦画布"></canvas>
+
+      <!-- 页面加载提示（初始化完成后自动隐藏） -->
+      <div class="canvas-shell__loader" id="pageLoader" aria-live="polite" aria-busy="true">
+        <p class="canvas-shell__loader-title">正在加载画板…</p>
+        <p class="canvas-shell__loader-desc">请稍候，即将准备就绪</p>
+      </div>
+
+      <!-- 操作引导（未开始涂鸦时显示） -->
+      <p class="canvas-shell__guide" id="canvasGuide">
+        点击底部「开始涂鸦」授权麦克风并开始创作（音频仅在本地处理）
+      </p>
+    </div>
+  </main>
+
+  <!-- 底部控制栏 -->
+  <footer class="control-bar">
+    <nav class="control-bar__actions" aria-label="画板控制">
+      <button
+        type="button"
+        class="btn btn--primary"
+        id="btnStart"
+        title="授权麦克风并开始涂鸦"
+      >
+        开始涂鸦
+      </button>
+      <button
+        type="button"
+        class="btn"
+        id="btnStop"
+        title="关闭麦克风并停止涂鸦"
+        disabled
+      >
+        停止涂鸦
+      </button>
+      <button
+        type="button"
+        class="btn"
+        id="btnClear"
+        title="清除画布上的全部内容"
+        disabled
+      >
+        清空画布
+      </button>
+      <button
+        type="button"
+        class="btn"
+        id="btnSave"
+        title="将当前作品保存为 PNG 图片"
+        disabled
+      >
+        保存作品
+      </button>
+    </nav>
+  </footer>
+
+  <!-- 状态栏：操作反馈与加载提示 -->
+  <div class="status-bar" id="statusBar" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
